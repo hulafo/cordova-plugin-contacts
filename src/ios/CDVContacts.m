@@ -194,12 +194,12 @@
                  methodName:command.methodName];
 
     // First check for Address book permissions
-    ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
-    if (status == kABAuthorizationStatusAuthorized) {
+    //ABAuthorizationStatus status = ABAddressBookGetAuthorizationStatus();
+    //if (status == kABAuthorizationStatusAuthorized) {
         [self chooseContact:newCommand];
         return;
-    }
-
+    //}
+    /*
     CDVPluginResult *errorResult = [CDVPluginResult resultWithStatus: CDVCommandStatus_ERROR messageAsInt:PERMISSION_DENIED_ERROR];
 
     // if the access is already restricted/denied the only way is to fail
@@ -207,18 +207,23 @@
         [self.commandDelegate sendPluginResult: errorResult callbackId:command.callbackId];
         return;
     }
-
+    
+    printf("grant permis");
     // if no permissions granted try to request them first
     if (status == kABAuthorizationStatusNotDetermined) {
+        printf("try permis");
         ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-            if (granted) {
+            printf("permis get ok");
+
+            //[self.commandDelegate sendPluginResult: errorResult callbackId:command.callbackId];
+        });
+        printf("permis ok");
+        //if (granted) {
                 [self chooseContact:newCommand];
                 return;
-            }
-
-            [self.commandDelegate sendPluginResult: errorResult callbackId:command.callbackId];
-        });
+        //    }
     }
+     */
 }
 
 - (BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController*)peoplePicker
